@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title> View Student Details </title>
+    </h:head>
+    
+    <h:body>
+        <center> 
+       <p:panel>     
+       <h:form>
+            <h:commandLink  value="Home" action="index"/> 
+            <h:outputLabel value="&#160;&#160;&#160;&#160;&#160;&#160;" />
+            <h:commandLink  value="Insert Student" action="insertStudent"/> <br></br>
+
+            <p:dataTable id="dataTable" var="student" value="#{studentManagedBean.studentList}" paginator="true" rows="10" 
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         resizableColumns="true">
+               <f:facet name="header">
+                Student Details
+            </f:facet>
+                <p:column sortBy="#{student.admno}">                    
+                     <f:facet name="header"> Admission No </f:facet>  
+                      <h:commandLink value="#{student.admno}" action="updateStudent">
+                         <f:setPropertyActionListener value="#{student}" target="#{studentManagedBean.selectedStudent}"/>
+                       </h:commandLink>
+                                                          
+                </p:column>
+
+                <p:column sortBy="#{student.name}">
+                    <f:facet name="header" >Student Name </f:facet>
+                     <h:outputText value="#{student.name}"> </h:outputText> 
+                </p:column> 
+                
+                <p:column sortBy="#{student.address}">
+                    <f:facet name="header">Address</f:facet>
+                    <h:outputText value="#{student.address}" />  		                                            
+                </p:column>
+
+                <p:column sortBy="#{student.grade}">
+                    <f:facet name="header">Grade</f:facet>
+                    <h:outputText value="#{student.grade}" />    		
+                </p:column>
+                     
+                <p:column sortBy="#{student.parentName}">                    
+                    <f:facet name="header">Parent Name</f:facet>     
+                    <h:outputText value="#{student.parentName}" />                                        
+                </p:column>    
+            </p:dataTable>
+        </h:form>  
+  </p:panel>  
+</center>
+ </h:body>
+</html>
+
